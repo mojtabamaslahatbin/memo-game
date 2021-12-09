@@ -3,6 +3,7 @@ import shuffle from "lodash/shuffle";
 import "./App.css";
 import imagesArray from "./Images";
 import Card from "./Components/Card";
+import Button from "@mui/material/Button";
 
 function App() {
     const [cards, setCards] = useState<string[]>(shuffle([...imagesArray, ...imagesArray]));
@@ -30,8 +31,6 @@ function App() {
     };
 
     const flipCard = (index: number) => {
-        console.log(index);
-
         if (activeCards.length === 0) {
             setActiveCards([...activeCards, index]);
         }
@@ -45,7 +44,6 @@ function App() {
                     if (foundPairs.length + 2 === cards.length) {
                         setGameWon(true);
                     }
-                    console.log("you find pair");
                     setFoundPairs([...foundPairs, firstCardIndex, secondCardIndex]);
                     setActiveCards([]);
                 } else {
@@ -70,17 +68,25 @@ function App() {
                         />
                     );
                 })}
-                {!gameWon && (
-                    <div className="text-message">
-                        <h4>Found Pairs : {foundPairs.length / 2}</h4>
-                        <button onClick={handleGlimpse}>Help</button>
-                    </div>
-                )}
                 {gameWon && (
                     <div className="text-message">
                         <h4>Found Pairs : {foundPairs.length / 2}</h4>
+                        <span>
+                            <Button variant="contained" onClick={handleGlimpse}>
+                                Help
+                            </Button>
+                        </span>
+                    </div>
+                )}
+                {!gameWon && (
+                    <div className="text-message">
+                        <h4>Found Pairs : {foundPairs.length / 2}</h4>
                         <h1>You Won!!</h1>
-                        <button onClick={handleReset}>RESET GAME</button>
+                        <span>
+                            <Button variant="contained" onClick={handleReset}>
+                                RESET GAME
+                            </Button>
+                        </span>
                     </div>
                 )}
             </div>

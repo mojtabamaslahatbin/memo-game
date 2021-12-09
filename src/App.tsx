@@ -68,7 +68,7 @@ function App() {
                         />
                     );
                 })}
-                {gameWon && (
+                {!gameWon && (
                     <div className="text-message">
                         <h4>Found Pairs : {foundPairs.length / 2}</h4>
                         <span>
@@ -78,7 +78,7 @@ function App() {
                         </span>
                     </div>
                 )}
-                {!gameWon && (
+                {gameWon && (
                     <div className="text-message">
                         <h4>Found Pairs : {foundPairs.length / 2}</h4>
                         <h1>You Won!!</h1>
